@@ -34,13 +34,23 @@ You will need:
 
 * At least Visual Studio 2019 16.9 or higher.
 * Xamarin.Android from the Visual Studio installer.
-* .NET 6 SDKs and any other dependencies as described [here](https://github.com/xamarin/net6-samples).
+* .NET 6 SDKs and any other dependencies as described [here][net6-samples].
 
 ## Notes for macOS
 
 The version of MSBuild shipped with Mono & VS for Mac is not currently new enough to build .NET 6 projects. For now, you will need to use `dotnet build` at the command-line.
 
-If you hit this error:
+If you hit the error:
+
+```
+error : /usr/local/share/dotnet/sdk/6.0.100-alpha.1.20562.2/Sdks/Microsoft.Android.Sdk/Sdk not found. Check that a recent enough .NET SDK is installed and/or increase the version specified in global.json.
+```
+
+Verify you are using `dotnet build` have the required [.NET 6][net6-samples] packages installed.
+
+### libMonoPosixHelper.dylib
+
+If you hit the error:
 
 ```
 error XACML7000: System.DllNotFoundException: Unable to load shared library 'MonoPosixHelper' or one of its dependencies.
@@ -62,3 +72,5 @@ Not implemented yet:
 
 * Xamarin.Android binding projects
 * Xamarin.iOS support
+
+[net6-samples]: https://github.com/xamarin/net6-samples

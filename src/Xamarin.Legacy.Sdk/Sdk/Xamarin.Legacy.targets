@@ -14,9 +14,9 @@
     <MSBuildExtensionsPath>$(VSINSTALLDIR)MSBuild</MSBuildExtensionsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
-    <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/Versions/Current/lib/</XamarinAndroidInstallPath>
-    <TargetFrameworkRootPath>$(XamarinAndroidInstallPath)xbuild-frameworks/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(XamarinAndroidInstallPath)xbuild</MSBuildExtensionsPath>
+    <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/</XamarinAndroidInstallPath>
+    <TargetFrameworkRootPath>$(XamarinAndroidInstallPath)Libraries/xbuild-frameworks/</TargetFrameworkRootPath>
+    <MSBuildExtensionsPath>$(XamarinAndroidInstallPath)Libraries/xbuild</MSBuildExtensionsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' ">
     <FrameworkPathOverride>$(TargetFrameworkRootPath)MonoAndroid/v1.0/</FrameworkPathOverride>
