@@ -1,0 +1,6 @@
+<Project Sdk="Xamarin.Legacy.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid11.0;net6.0-android</TargetFrameworks>
+    <IsBindingProject>true</IsBindingProject>
+  </PropertyGroup>
+</Project>

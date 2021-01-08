@@ -28,6 +28,19 @@ Or specify the version inline:
 <Project Sdk="Xamarin.Legacy.Sdk/0.1.0">
 ```
 
+To setup a binding project instead of a class library, simply set
+`<IsBindingProject>true</IsBindingProject>` in your `.csproj` file.
+
+## Samples
+
+* `Hello`: a simple Xamarin.Android class library.
+* `JavaBinding`: a Xamarin.Android binding for
+  [com.google.code.gson][gson] based off of the
+  [GoogleGson][xamaringson] Xamarin component.
+
+[gson]: https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.5
+[xamaringson]: https://github.com/xamarin/XamarinComponents/tree/master/Android/GoogleGson/source/GoogleGson
+
 ## Installation requirements
 
 You will need:

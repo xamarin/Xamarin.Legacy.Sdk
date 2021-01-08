@@ -26,7 +26,8 @@
     <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"  Condition=" '$(IsBindingProject)' != 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.Binding.targets" Condition=" '$(IsBindingProject)' == 'true' " />
   <Import Sdk="Microsoft.Android.Sdk" Project="AutoImport.props" />
   <Import Sdk="Microsoft.Android.Sdk" Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets" />
   <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
