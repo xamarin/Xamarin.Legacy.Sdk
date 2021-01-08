@@ -36,6 +36,26 @@ You will need:
 * Xamarin.Android from the Visual Studio installer.
 * .NET 6 SDKs and any other dependencies as described [here](https://github.com/xamarin/net6-samples).
 
+## Notes for macOS
+
+The version of MSBuild shipped with Mono & VS for Mac is not currently new enough to build .NET 6 projects. For now, you will need to use `dotnet build` at the command-line.
+
+If you hit this error:
+
+```
+error XACML7000: System.DllNotFoundException: Unable to load shared library 'MonoPosixHelper' or one of its dependencies.
+In order to help diagnose loading problems, consider setting the DYLD_PRINT_LIBRARIES environment variable: dlopen(libMonoPosixHelper, 1): image not found 
+```
+
+A temporary workaround would be:
+
+```bash
+$ cd /Library/Frameworks/Xamarin.Android.framework/Versions/Current/lib/xbuild/Xamarin/Android/lib/host-Darwin/
+$ sudo cp libMonoPosixHelper.dylib ../../
+```
+
+This simply copies to an additional location so it can be loaded when running under .NET 6.
+
 ## TODO
 
 Not implemented yet:
