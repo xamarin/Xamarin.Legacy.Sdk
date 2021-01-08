@@ -36,6 +36,42 @@ You will need:
 * Xamarin.Android from the Visual Studio installer.
 * .NET 6 SDKs and any other dependencies as described [here][net6-samples].
 
+## Notes for Windows
+
+`dotnet build` command-line with .NET 6 will have a new enough MSBuild for this to work.
+
+Otherwise, you will at least need Visual Studio 2019 16.9 which is currently in preview to use:
+
+```cmd
+> "C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\MSBuild.exe" -version
+```
+
+You will also need to enable a feature-flag to enable .NET 6 workloads. In an administrator command prompt:
+
+```cmd
+cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\SdkResolvers\Microsoft.DotNet.MSBuildSdkResolver"
+echo > EnableWorkloadResolver.sentinel
+```
+
+This will create an empty file.
+
+### Microsoft.Android.Sdk not installed
+
+If you hit the error:
+
+```
+The following workload packs were not installed: Microsoft.Android.Sdk
+```
+
+Temporarily, you can make a symbolic link to workaround this. In an administrator command prompt:
+
+```cmd
+> mklink /J "C:\Program Files\dotnet\packs\Microsoft.Android.Sdk" "C:\Program Files\dotnet\packs\Microsoft.Android.Sdk.win-x64"
+Junction created for C:\Program Files\dotnet\packs\Microsoft.Android.Sdk <<===>> C:\Program Files\dotnet\packs\Microsoft.Android.Sdk.win-x64
+```
+
+This workaround should no longer be needed when the MSBuild shipped in Visual Studio is updated.
+
 ## Notes for macOS
 
 The version of MSBuild shipped with Mono & VS for Mac is not currently new enough to build .NET 6 projects. For now, you will need to use `dotnet build` at the command-line.
