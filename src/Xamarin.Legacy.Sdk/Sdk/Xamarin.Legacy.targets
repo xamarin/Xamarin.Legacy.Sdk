@@ -1,0 +1,41 @@
+<Project>
+  <!--
+    In some cases, MSBuild already has a valid $(MSBuildExtensionsPath).
+    This would happen when building with a new enough .NET framework/Mono MSBuild.
+  -->
+  <PropertyGroup Condition=" !Exists('$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets') ">
+    <_FixupsNeeded>true</_FixupsNeeded>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) ">
+    <!-- At the moment 16.9 is in Preview, prefer it -->
+    <VSINSTALLDIR Condition=" '$(VSINSTALLDIR)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VSINSTALLDIR>
+    <VSINSTALLDIR Condition=" '$(VSINSTALLDIR)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VSINSTALLDIR>
+    <TargetFrameworkRootPath>$(VSINSTALLDIR)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
+    <MSBuildExtensionsPath>$(VSINSTALLDIR)MSBuild</MSBuildExtensionsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
+    <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/Versions/Current/lib/</XamarinAndroidInstallPath>
+    <TargetFrameworkRootPath>$(XamarinAndroidInstallPath)xbuild-frameworks/</TargetFrameworkRootPath>
+    <MSBuildExtensionsPath>$(XamarinAndroidInstallPath)xbuild</MSBuildExtensionsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' ">
+    <FrameworkPathOverride>$(TargetFrameworkRootPath)MonoAndroid/v1.0/</FrameworkPathOverride>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputPath Condition=" '$(OutputPath)' == '' ">$(BaseOutputPath)$(Configuration)</OutputPath>
+    <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
+    <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets" />
+  <Import Sdk="Microsoft.Android.Sdk" Project="AutoImport.props" />
+  <Import Sdk="Microsoft.Android.Sdk" Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets" />
+  <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
+    <Reference Include="mscorlib"                CopyLocal="false" />
+    <Reference Include="Mono.Android"            CopyLocal="false" />
+    <Reference Include="System"                  CopyLocal="false" />
+    <Reference Include="System.Core"             CopyLocal="false" />
+    <Reference Include="System.Numerics"         CopyLocal="false" />
+    <Reference Include="System.Numerics.Vectors" CopyLocal="false" />
+    <Reference Include="System.Xml"              CopyLocal="false" />
+  </ItemGroup>
+</Project>

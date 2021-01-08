@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.1.0</PackageVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <NoWarn>NU5128</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="@(None)" Pack="true" PackagePath="/" />
+  </ItemGroup>
+  <Target Name="_ClearNuGetCache" BeforeTargets="Build">
+    <RemoveDir Directories="$(MSBuildThisFileDirectory)..\..\packages\xamarin.legacy.sdk\" />
+  </Target>
+</Project>

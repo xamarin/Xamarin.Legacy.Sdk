@@ -1,0 +1,6 @@
+<Project Sdk="Xamarin.Legacy.Sdk">
+  <PropertyGroup>
+    <!--TODO: Xamarin.iOS support-->
+    <TargetFrameworks>monoandroid11.0;net6.0-android</TargetFrameworks>
+  </PropertyGroup>
+</Project>
