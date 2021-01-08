@@ -64,7 +64,7 @@ $ cd /Library/Frameworks/Xamarin.Android.framework/Versions/Current/lib/xbuild/X
 $ sudo cp libMonoPosixHelper.dylib ../../
 ```
 
-This simply copies to an additional location so it can be loaded when running under .NET 6.
+This simply copies `libMonoPosixHelper.dylib` to an additional location so it can be loaded when running under .NET 6.
 
 ## TODO
 
