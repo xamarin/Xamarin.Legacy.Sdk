@@ -7,7 +7,7 @@ This allows you to create a class library such as:
 ```xml
 <Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid11.0;net6.0-android</TargetFrameworks>
+    <TargetFrameworks>monoandroid11.0;xamarin.ios10;net6.0-android;net6.0-ios</TargetFrameworks>
   </PropertyGroup>
 </Project>
 ```
