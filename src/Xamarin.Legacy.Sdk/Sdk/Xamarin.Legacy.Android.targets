@@ -7,11 +7,12 @@
     <_FixupsNeeded>true</_FixupsNeeded>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) ">
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and '$(VSINSTALLDIR)' != '' ">$(VSINSTALLDIR)</VsInstallRoot>
     <!-- At the moment 16.9 is in Preview, prefer it -->
-    <VSINSTALLDIR Condition=" '$(VSINSTALLDIR)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VSINSTALLDIR>
-    <VSINSTALLDIR Condition=" '$(VSINSTALLDIR)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VSINSTALLDIR>
-    <TargetFrameworkRootPath>$(VSINSTALLDIR)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(VSINSTALLDIR)MSBuild</MSBuildExtensionsPath>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
+    <TargetFrameworkRootPath>$(VsInstallRoot)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
+    <MSBuildExtensionsPath>$(VsInstallRoot)MSBuild</MSBuildExtensionsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
     <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/</XamarinAndroidInstallPath>
@@ -22,6 +23,7 @@
     <FrameworkPathOverride>$(TargetFrameworkRootPath)MonoAndroid/v1.0/</FrameworkPathOverride>
   </PropertyGroup>
   <PropertyGroup>
+    <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
     <OutputPath Condition=" '$(OutputPath)' == '' ">$(BaseOutputPath)$(Configuration)</OutputPath>
     <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>

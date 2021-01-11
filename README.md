@@ -119,7 +119,6 @@ This simply copies `libMonoPosixHelper.dylib` to an additional location so it ca
 
 Not implemented yet:
 
-* Xamarin.Android binding projects
-* Xamarin.iOS support
+* Xamarin.iOS binding projects
 
 [net6-samples]: https://github.com/xamarin/net6-samples
