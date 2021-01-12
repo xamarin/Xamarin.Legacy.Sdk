@@ -3,5 +3,6 @@
     <!-- A public property that could be used to detect this SDK -->
     <XamarinLegacySdk>true</XamarinLegacySdk>
   </PropertyGroup>
-  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+  <Import Sdk="Microsoft.NET.Sdk"     Project="Sdk.props" />
+  <Import Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' " Sdk="Microsoft.Android.Sdk" Project="AutoImport.props" />
 </Project>

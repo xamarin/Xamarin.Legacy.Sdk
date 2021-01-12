@@ -28,10 +28,9 @@
     <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"  Condition=" '$(IsBindingProject)' != 'true' " />
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.Binding.targets" Condition=" '$(IsBindingProject)' == 'true' " />
-  <Import Sdk="Microsoft.Android.Sdk" Project="AutoImport.props" />
   <Import Sdk="Microsoft.Android.Sdk" Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets" />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"   Condition=" '$(IsBindingProject)' != 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.Bindings.targets" Condition=" '$(IsBindingProject)' == 'true' " />
   <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
     <Reference Include="mscorlib"                CopyLocal="false" />
     <Reference Include="Mono.Android"            CopyLocal="false" />
