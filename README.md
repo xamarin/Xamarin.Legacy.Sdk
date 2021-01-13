@@ -1,6 +1,6 @@
 # Xamarin.Legacy.Sdk
 
-An unofficial MSBuild SDK for multitargeting for "legacy" Xamarin and .NET 6.
+An unofficial MSBuild SDK for multitargeting for "legacy" Xamarin and .NET 6. _Not fully supported._
 
 This allows you to create a class library such as:
 
