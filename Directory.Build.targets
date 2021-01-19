@@ -1,5 +1,0 @@
-<Project>
-  <Target Name="_MakeNuGetSourceDirs" BeforeTargets="Restore">
-    <MakeDir Directories="$(MSBuildThisFileDirectory)/bin/Debug;$(MSBuildThisFileDirectory)/bin/Release" />
-  </Target>
-</Project>
