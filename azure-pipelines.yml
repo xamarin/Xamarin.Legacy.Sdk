@@ -33,10 +33,10 @@ jobs:
       & boots $(Android.Msi)
       & boots $(iOS.Msi)
     displayName: install .NET workloads
+    errorActionPreference: stop
   - powershell: |
       & boots $(Xamarin.Android.Vsix)
     displayName: install Xamarin.Android
-    errorActionPreference: stop
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
   - script: dotnet build samples/samples.sln -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
@@ -72,7 +72,8 @@ jobs:
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
-  - script: dotnet build samples/samples.sln -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
+  # TODO: build all samples when problem with generator.exe is fixed
+  - script: dotnet build samples/Hello/Hello.csproj -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
     displayName: build samples
   - task: PublishPipelineArtifact@1
     displayName: artifacts
