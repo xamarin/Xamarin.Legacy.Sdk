@@ -2,5 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>monoandroid11.0;net6.0-android</TargetFrameworks>
     <IsBindingProject>true</IsBindingProject>
+    <!-- Hide some warnings -->
+    <NoWarn>CS0108;CS0114;BG8700</NoWarn>
   </PropertyGroup>
 </Project>

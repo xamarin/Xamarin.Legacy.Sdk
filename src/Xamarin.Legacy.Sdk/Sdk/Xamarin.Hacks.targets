@@ -1,0 +1,13 @@
+<!--
+    A collection of "hacks" for both iOS/Android, only imported when $(_FixupsNeeded) is true.
+-->
+<Project>
+  <!-- HACK: $(AssemblySearchPaths) is getting escaped somewhere? -->
+  <Target Name="_FixResolveAssemblyReference"
+      Condition=" '$(_FixupsNeeded)' == 'true' "
+      BeforeTargets="ResolveAssemblyReferences">
+    <PropertyGroup>
+      <AssemblySearchPaths>$([MSBuild]::Unescape($(AssemblySearchPaths)))</AssemblySearchPaths>
+    </PropertyGroup>
+  </Target>
+</Project>
