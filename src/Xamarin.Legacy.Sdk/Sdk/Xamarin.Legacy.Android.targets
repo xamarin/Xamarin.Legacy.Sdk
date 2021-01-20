@@ -12,12 +12,12 @@
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VsInstallRoot>
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
     <TargetFrameworkRootPath>$(VsInstallRoot)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(VsInstallRoot)MSBuild</MSBuildExtensionsPath>
+    <_LegacyExtensionsPath>$(VsInstallRoot)MSBuild</_LegacyExtensionsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
     <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/</XamarinAndroidInstallPath>
     <TargetFrameworkRootPath>$(XamarinAndroidInstallPath)Libraries/xbuild-frameworks/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(XamarinAndroidInstallPath)Libraries/xbuild</MSBuildExtensionsPath>
+    <_LegacyExtensionsPath>$(XamarinAndroidInstallPath)Libraries/xbuild</_LegacyExtensionsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' ">
     <FrameworkPathOverride>$(TargetFrameworkRootPath)MonoAndroid/v1.0/</FrameworkPathOverride>
@@ -29,8 +29,10 @@
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
   <Import Sdk="Microsoft.Android.Sdk" Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets" />
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"   Condition=" '$(IsBindingProject)' != 'true' " />
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.Bindings.targets" Condition=" '$(IsBindingProject)' == 'true' " />
+  <Import Project="$(_LegacyExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"   Condition=" '$(IsBindingProject)' != 'true' and '$(_FixupsNeeded)' == 'true' " />
+  <Import Project="$(_LegacyExtensionsPath)/Xamarin/Android/Xamarin.Android.Bindings.targets" Condition=" '$(IsBindingProject)' == 'true' and '$(_FixupsNeeded)' == 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"   Condition=" '$(IsBindingProject)' != 'true' and '$(_FixupsNeeded)' != 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.Bindings.targets" Condition=" '$(IsBindingProject)' == 'true' and '$(_FixupsNeeded)' != 'true' " />
   <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
     <Reference Include="mscorlib"                CopyLocal="false" />
     <Reference Include="Mono.Android"            CopyLocal="false" />
