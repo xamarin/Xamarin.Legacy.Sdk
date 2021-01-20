@@ -1,5 +1,7 @@
 <Project>
+  <PropertyGroup>
+    <LanguageTargets Condition=" $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.Android.targets</LanguageTargets>
+    <LanguageTargets Condition=" $(TargetFramework.StartsWith ('Xamarin.iOS', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.iOS.targets</LanguageTargets>
+  </PropertyGroup>
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
-  <Import Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' " Project="Xamarin.Legacy.Android.targets" />
-  <Import Condition=" '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' " Project="Xamarin.Legacy.iOS.targets" />
 </Project>
