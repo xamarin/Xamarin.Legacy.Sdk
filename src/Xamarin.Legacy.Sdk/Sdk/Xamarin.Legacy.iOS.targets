@@ -12,20 +12,21 @@
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VsInstallRoot>
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
     <TargetFrameworkRootPath>$(VsInstallRoot)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(VsInstallRoot)MSBuild</MSBuildExtensionsPath>
+    <_LegacyExtensionsPath>$(VsInstallRoot)MSBuild</_LegacyExtensionsPath>
     <FrameworkPathOverride>$(TargetFrameworkRootPath)Xamarin.iOS/v1.0/</FrameworkPathOverride>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
     <MonoPath Condition=" '$(MonoPath)' == '' ">/Library/Frameworks/Mono.framework/</MonoPath>
     <XamariniOSInstallPath Condition=" '$(XamariniOSInstallPath)' == '' ">/Library/Frameworks/Xamarin.iOS.framework/</XamariniOSInstallPath>
     <TargetFrameworkRootPath>$(MonoPath)External/xbuild-frameworks/</TargetFrameworkRootPath>
-    <MSBuildExtensionsPath>$(MonoPath)External/xbuild</MSBuildExtensionsPath>
+    <_LegacyExtensionsPath>$(MonoPath)External/xbuild</_LegacyExtensionsPath>
     <FrameworkPathOverride>$(XamariniOSInstallPath)Versions/Current/lib/mono/Xamarin.iOS/</FrameworkPathOverride>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);IOS</DefineConstants>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" />
+  <Import Project="$(_LegacyExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
   <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
     <Reference Include="mscorlib"                CopyLocal="false" />
     <Reference Include="Xamarin.iOS"             CopyLocal="false" />
