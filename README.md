@@ -1,6 +1,6 @@
 # Xamarin.Legacy.Sdk
 
-An unofficial MSBuild SDK for multitargeting for "legacy" Xamarin and .NET 6. _Not fully supported._
+An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6. _Not fully supported._
 
 This allows you to create a class library such as:
 
@@ -33,7 +33,8 @@ To setup a binding project instead of a class library, simply set
 
 ## Samples
 
-* `Hello`: a simple Xamarin.Android class library.
+* `Hello`: a simple class library targeting Xamarin.iOS,
+  Xamarin.Android, and .NET 6
 * `JavaBinding`: a Xamarin.Android binding for
   [com.google.code.gson][gson] based off of the
   [GoogleGson][xamaringson] Xamarin component.
