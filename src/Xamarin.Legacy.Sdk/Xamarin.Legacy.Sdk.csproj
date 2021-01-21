@@ -1,13 +1,21 @@
 <Project Sdk="Microsoft.Build.NoTargets">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.1.0-alpha1</PackageVersion>
     <OutputPath>../../bin/$(Configuration)/</OutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <NoWarn>NU5128</NoWarn>
+    <Description>An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6. *Not fully supported*</Description>
+    <Authors>Microsoft</Authors>
+    <Owners>Microsoft, Xamarin</Owners>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/xamarin/Xamarin.Legacy.Sdk</PackageProjectUrl>
+    <PackageTags>Xamarin .NET 6 MSBuild Android iOS</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
     <None Update="@(None)" Pack="true" PackagePath="/" />
   </ItemGroup>
   <Target Name="_ClearNuGetCache" BeforeTargets="Build">
