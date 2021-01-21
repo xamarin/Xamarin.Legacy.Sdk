@@ -42,4 +42,5 @@
     <Reference Include="System.Numerics.Vectors" CopyLocal="false" />
     <Reference Include="System.Xml"              CopyLocal="false" />
   </ItemGroup>
+  <Import Project="Xamarin.Hacks.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
 </Project>

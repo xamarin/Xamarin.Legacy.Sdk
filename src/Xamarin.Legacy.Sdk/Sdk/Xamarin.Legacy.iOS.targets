@@ -36,14 +36,6 @@
     <Reference Include="System.Numerics.Vectors" CopyLocal="false" />
     <Reference Include="System.Xml"              CopyLocal="false" />
   </ItemGroup>
-  <!-- HACK: $(AssemblySearchPaths) is getting escaped somewhere? -->
-  <Target Name="_FixResolveAssemblyReference"
-      Condition=" '$(_FixupsNeeded)' == 'true' "
-      BeforeTargets="ResolveAssemblyReferences">
-    <PropertyGroup>
-      <AssemblySearchPaths>$([MSBuild]::Unescape($(AssemblySearchPaths)))</AssemblySearchPaths>
-    </PropertyGroup>
-  </Target>
   <!-- HACK: workaround $(TargetFrameworkDirectory) on macOS -->
   <Target Name="_FixTargetFrameworkDirectory"
       Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) "
@@ -52,4 +44,5 @@
       <TargetFrameworkDirectory>$(FrameworkPathOverride)</TargetFrameworkDirectory>
     </PropertyGroup>
   </Target>
+  <Import Project="Xamarin.Hacks.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
 </Project>
