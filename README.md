@@ -17,7 +17,7 @@ You will also need either include a `global.json` with:
 ```json
 {
   "msbuild-sdks": {
-    "Xamarin.Legacy.Sdk": "0.1.0"
+    "Xamarin.Legacy.Sdk": "0.1.0-alpha1"
   }
 }
 ```
@@ -25,7 +25,7 @@ You will also need either include a `global.json` with:
 Or specify the version inline:
 
 ```xml
-<Project Sdk="Xamarin.Legacy.Sdk/0.1.0">
+<Project Sdk="Xamarin.Legacy.Sdk/0.1.0-alpha1">
 ```
 
 To setup a binding project instead of a class library, simply set
