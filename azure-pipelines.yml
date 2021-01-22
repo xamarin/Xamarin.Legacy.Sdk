@@ -17,17 +17,17 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100-alpha.1.20562.2
+    value: 6.0.100-alpha.1.21064.27
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: Android.Msi
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4392253/master/686ccdae98bbaa447aa485b785e51e6d583fd943/Microsoft.NET.Workload.Android.11.0.200.40.msi
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4396987/master/1877dd5ebee90452c6ab2cc33a58498a83ea7c1f/Microsoft.NET.Workload.Android.11.0.200.43.msi
   - name: Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4392253/master/686ccdae98bbaa447aa485b785e51e6d583fd943/Microsoft.NET.Workload.Android-11.0.200-ci.master.40.pkg
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4396987/master/1877dd5ebee90452c6ab2cc33a58498a83ea7c1f/Microsoft.NET.Workload.Android-11.0.200-ci.master.43.pkg
   - name: Xamarin.Android.Vsix
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4392253/master/686ccdae98bbaa447aa485b785e51e6d583fd943/signed/Xamarin.Android.Sdk-11.2.99.40.vsix
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4396987/master/1877dd5ebee90452c6ab2cc33a58498a83ea7c1f/signed/Xamarin.Android.Sdk-11.2.99.43.vsix
   - name: Xamarin.Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4392253/master/686ccdae98bbaa447aa485b785e51e6d583fd943/xamarin.android-11.2.99.40.pkg
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4396987/master/1877dd5ebee90452c6ab2cc33a58498a83ea7c1f/xamarin.android-11.2.99.43.pkg
   - name: iOS.Msi
     value: https://bosstoragemirror.blob.core.windows.net/wrench/jenkins/main/3174e94a178c41cae0a51fa296e52f711957c14a/543/package/Microsoft.NET.Workload.iOS.14.2.100-ci.main.30.msi
   - name: iOS.Pkg
@@ -46,13 +46,11 @@ jobs:
       & .\dotnet-install.ps1 -Version $(DotNetVersion) -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
-    errorActionPreference: stop
   - powershell: |
       & dotnet tool install --global boots
       & boots $(Android.Msi)
       & boots $(iOS.Msi)
     displayName: install .NET workloads
-    errorActionPreference: stop
   - powershell: |
       & boots $(Xamarin.Android.Vsix)
     displayName: install Xamarin.Android
@@ -98,8 +96,7 @@ jobs:
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
-  # TODO: build all samples when problem with generator.exe is fixed
-  - script: dotnet build samples/Hello/Hello.csproj -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
+  - script: dotnet build samples/samples.sln -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
     displayName: build samples
   - task: PublishPipelineArtifact@1
     displayName: artifacts
