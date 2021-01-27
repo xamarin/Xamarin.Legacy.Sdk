@@ -1,8 +1,67 @@
 # Xamarin.Legacy.Sdk
 
-An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6. _Not fully supported._
+An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6.
+*Not fully supported.*
 
-This allows you to create a class library such as:
+## What is this? When would I need it?
+
+You only need `Xamarin.Legacy.Sdk` if you have a NuGet package that
+needs to target "legacy" Xamarin and .NET 6 *at the same time*.
+
+*NOTE: If you are looking for general information about Xamarin and
+.NET 6. You might start with the [net6-samples][net6-samples] Github
+repository instead.*
+
+Xamarin components like [AndroidX][androidx] or [Google Play
+Services][gps] are prime examples that need to use
+`Xamarin.Legacy.Sdk`.
+
+For example, the current `Xamarin.AndroidX.AppCompat.nupkg` includes:
+
+* lib\monoandroid90\
+  * Xamarin.AndroidX.AppCompat.dll
+
+Note that the `monoandroid90` assembly *may* continue to fully work in
+.NET 6. This, however, brings some compatibility baggage along with
+it. For example, `Xamarin.AndroidX.AppCompat.dll` will have a
+reference to `mscorlib.dll`. `mscorlib.dll` does not exist in .NET 6,
+and types in `mscorlib.dll` are [forwarded][type-forwards] to the
+appropriate .NET 6 BCL assembly. The way for
+`Xamarin.AndroidX.AppCompat.dll` to fully support .NET 6 is to
+actually be compiled *against* .NET 6.
+
+If the package needs to continue shipping `monoandroid90` but *also*
+include full support for .NET 6, the package could include additional
+target frameworks:
+
+* lib\monoandroid90\
+  * Xamarin.AndroidX.AppCompat.dll
+* lib\net6.0-android30.0\
+  * Xamarin.AndroidX.AppCompat.dll
+
+Previously, there was not a "nice" way to produce the above package.
+It would involve multiple `.csproj` files and a `.nuspec` that
+combines the files together.
+
+Xamarin.Legacy.Sdk solves this problem by:
+
+* Starting with a .NET 6 project that produces a `net6.0` class
+  library -- built via `dotnet build`.
+* Using `Xamarin.Legacy.Sdk` allows the .NET 6 project to add
+  additional `$(TargetFrameworks)` such as `monoandroid11.0` or
+  `xamarin.ios10`.
+* This effectively imports `Xamarin.Android/iOS.CSharp.targets`
+  running the existing Xamarin MSBuild tasks & targets under `dotnet
+  build`.
+
+[net6-samples]: https://github.com/xamarin/net6-samples
+[androidx]: https://github.com/xamarin/AndroidX
+[gps]: https://github.com/xamarin/GooglePlayServicesComponents
+[type-forwards]: https://docs.microsoft.com/dotnet/standard/assembly/type-forwarding
+
+### Getting started
+
+`Xamarin.Legacy.Sdk` allows you to create a class library such as:
 
 ```xml
 <Project Sdk="Xamarin.Legacy.Sdk">
@@ -31,6 +90,24 @@ Or specify the version inline:
 To setup a binding project instead of a class library, simply set
 `<IsBindingProject>true</IsBindingProject>` in your `.csproj` file.
 
+### What about [MSBuild.Sdk.Extras][sdkextras]?
+
+We considered adding to [MSBuild.Sdk.Extras][sdkextras], however, a few things would make this story... complicated.
+
+`Xamarin.Legacy.Sdk` emulates all behavior of .NET 6. This means all MSBuild defaults will be applied, such as:
+
+* `$(DefineConstants)` includes `ANDROID` and `IOS` defines as are
+  included in .NET 6 by default.
+* Default wildcards from [`AutoImport.props`][autoimport].
+* MSBuild property defaults from
+  [`DefaultProperties.targets`][defaultprops].
+
+This would certainly introduce breaking changes to [MSBuild.Sdk.Extras][sdkextras].
+
+[sdkextras]: https://github.com/novotnyllc/MSBuildSdkExtras
+[autoimport]: https://github.com/xamarin/xamarin-android/blob/15b40af7d62e0e2003d2a009576834a71967dbb2/src/Xamarin.Android.Build.Tasks/Microsoft.Android.Sdk/Sdk/AutoImport.props
+[defaultprops]: https://github.com/xamarin/xamarin-android/blob/15b40af7d62e0e2003d2a009576834a71967dbb2/src/Xamarin.Android.Build.Tasks/Microsoft.Android.Sdk/targets/Microsoft.Android.Sdk.DefaultProperties.targets
+
 ## Samples
 
 * `Hello`: a simple class library targeting Xamarin.iOS,
@@ -46,11 +123,21 @@ To setup a binding project instead of a class library, simply set
 
 You will need:
 
-* At least Visual Studio 2019 16.9 or higher.
-* Xamarin.Android from the Visual Studio installer.
-* .NET 6 SDKs and any other dependencies as described [here][net6-samples].
+* .NET 6 SDKs and any other dependencies as described by the [.NET 6
+  samples repo][net6-samples].
+* At least Visual Studio 2019 16.9 Preview 4 or higher for IDE support
+  for .NET 6.
+* The Xamarin workload from the Visual Studio installer.
 
-## Notes for Windows
+*NOTE: that at least Xamarin.Android 11.2.99.43 is needed for Java
+bindings, which is a nightly build.*
+
+View [azure-pipelines.yml](azure-pipelines.yml) for known good builds
+and download links.
+
+## Troubleshooting
+
+### Notes for Windows
 
 `dotnet build` command-line with .NET 6 will have a new enough MSBuild for this to work.
 
@@ -69,7 +156,7 @@ echo > EnableWorkloadResolver.sentinel
 
 This will create an empty file.
 
-### Microsoft.Android.Sdk not installed
+#### Microsoft.Android.Sdk not installed
 
 If you hit the error:
 
@@ -98,7 +185,7 @@ error : /usr/local/share/dotnet/sdk/6.0.100-alpha.1.20562.2/Sdks/Microsoft.Andro
 
 Verify you are using `dotnet build` have the required [.NET 6][net6-samples] packages installed.
 
-### libMonoPosixHelper.dylib
+#### libMonoPosixHelper.dylib
 
 If you hit the error:
 
@@ -115,14 +202,6 @@ $ sudo cp libMonoPosixHelper.dylib ../../
 ```
 
 This simply copies `libMonoPosixHelper.dylib` to an additional location so it can be loaded when running under .NET 6.
-
-## TODO
-
-Not implemented yet:
-
-* Xamarin.iOS binding projects
-
-[net6-samples]: https://github.com/xamarin/net6-samples
 
 ## Contributing
 
