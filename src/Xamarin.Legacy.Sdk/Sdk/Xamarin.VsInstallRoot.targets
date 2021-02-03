@@ -1,0 +1,11 @@
+<!-- This files assumes it is imported on Windows-only -->
+<Project>
+  <PropertyGroup>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and '$(VSINSTALLDIR)' != '' ">$(VSINSTALLDIR)</VsInstallRoot>
+    <!-- At the moment 16.9 is in Preview, prefer it -->
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
+    <TargetFrameworkRootPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
+    <_LegacyExtensionsPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))MSBuild</_LegacyExtensionsPath>
+  </PropertyGroup>
+</Project>
