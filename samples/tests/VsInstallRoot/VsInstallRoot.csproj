@@ -1,0 +1,7 @@
+<Project Sdk="Xamarin.Legacy.Sdk">
+  <Import Condition=" $([MSBuild]::IsOSPlatform ('windows')) " Project="../../../src/Xamarin.Legacy.Sdk/Sdk/Xamarin.VsInstallRoot.targets" />
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid11.0;xamarin.ios10;net6.0-android;net6.0-ios</TargetFrameworks>
+    <VsInstallRoot Condition=" HasTrailingSlash($(VsInstallRoot)) ">$(VsInstallRoot.TrimEnd ('/').TrimEnd ('\'))</VsInstallRoot>
+  </PropertyGroup>
+</Project>

@@ -6,14 +6,10 @@
   <PropertyGroup Condition=" !Exists('$(MSBuildExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets') ">
     <_FixupsNeeded>true</_FixupsNeeded>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) ">
-    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and '$(VSINSTALLDIR)' != '' ">$(VSINSTALLDIR)</VsInstallRoot>
-    <!-- At the moment 16.9 is in Preview, prefer it -->
-    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Preview/</VsInstallRoot>
-    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
-    <TargetFrameworkRootPath>$(VsInstallRoot)Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
-    <_LegacyExtensionsPath>$(VsInstallRoot)MSBuild</_LegacyExtensionsPath>
-  </PropertyGroup>
+  <Import
+      Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) "
+      Project="Xamarin.VsInstallRoot.targets"
+  />
   <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
     <XamarinAndroidInstallPath Condition=" '$(XamarinAndroidInstallPath)' == '' ">/Library/Frameworks/Xamarin.Android.framework/</XamarinAndroidInstallPath>
     <TargetFrameworkRootPath>$(XamarinAndroidInstallPath)Libraries/xbuild-frameworks/</TargetFrameworkRootPath>
