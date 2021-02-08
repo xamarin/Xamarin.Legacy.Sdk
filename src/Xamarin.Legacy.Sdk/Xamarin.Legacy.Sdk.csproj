@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <NoWarn>NU5128</NoWarn>
-    <Description>An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6. *Not fully supported*</Description>
+    <Description>Starting from a .NET 6 project, adds the ability to target legacy Xamarin target frameworks such as monoandroid11.0 or xamarin.ios10. *Not fully supported*</Description>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft, Xamarin</Owners>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
