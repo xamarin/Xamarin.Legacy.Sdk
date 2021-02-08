@@ -1,7 +1,8 @@
 # Xamarin.Legacy.Sdk
 
-An unofficial MSBuild SDK for multitargeting "legacy" Xamarin and .NET 6.
-*Not fully supported.*
+Starting from a .NET 6 project, adds the ability to target legacy
+Xamarin target frameworks such as `monoandroid11.0` or
+`xamarin.ios10`. *Not fully supported.*
 
 ## What is this? When would I need it?
 
