@@ -22,14 +22,15 @@ For example, the current `Xamarin.AndroidX.AppCompat.nupkg` includes:
 * lib\monoandroid90\
   * Xamarin.AndroidX.AppCompat.dll
 
-Note that the `monoandroid90` assembly *may* continue to fully work in
-.NET 6. This, however, brings some compatibility baggage along with
-it. For example, `Xamarin.AndroidX.AppCompat.dll` will have a
-reference to `mscorlib.dll`. `mscorlib.dll` does not exist in .NET 6,
-and types in `mscorlib.dll` are [forwarded][type-forwards] to the
-appropriate .NET 6 BCL assembly. The way for
-`Xamarin.AndroidX.AppCompat.dll` to fully support .NET 6 is to
-actually be compiled *against* .NET 6.
+Note that the `monoandroid90` assembly *might work* in .NET 6.
+Failures could certainly happen at runtime, due to using a completely
+different BCL. Using legacy Xamarin packages also brings some
+compatibility baggage along with it. For example,
+`Xamarin.AndroidX.AppCompat.dll` will have a reference to
+`mscorlib.dll`. `mscorlib.dll` does not exist in .NET 6, and types in
+`mscorlib.dll` are [forwarded][type-forwards] to the appropriate .NET
+6 BCL assembly. The way for `Xamarin.AndroidX.AppCompat.dll` to fully
+support .NET 6 is to actually be compiled *against* .NET 6.
 
 If the package needs to continue shipping `monoandroid90` but *also*
 include full support for .NET 6, the package could include additional
