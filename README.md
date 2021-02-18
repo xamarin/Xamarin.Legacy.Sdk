@@ -10,8 +10,8 @@ You only need `Xamarin.Legacy.Sdk` if you have a NuGet package that
 needs to target "legacy" Xamarin and .NET 6 *at the same time*.
 
 *NOTE: If you are looking for general information about Xamarin and
-.NET 6. You might start with the [net6-samples][net6-samples] Github
-repository instead.*
+.NET 6. You might start with the [dotnet/net6-mobile-samples][net6-samples]
+Github repository instead.*
 
 Xamarin components like [AndroidX][androidx] or [Google Play
 Services][gps] are prime examples that need to use
@@ -56,7 +56,7 @@ Xamarin.Legacy.Sdk solves this problem by:
   running the existing Xamarin MSBuild tasks & targets under `dotnet
   build`.
 
-[net6-samples]: https://github.com/xamarin/net6-samples
+[net6-samples]: https://github.com/dotnet/net6-mobile-samples
 [androidx]: https://github.com/xamarin/AndroidX
 [gps]: https://github.com/xamarin/GooglePlayServicesComponents
 [type-forwards]: https://docs.microsoft.com/dotnet/standard/assembly/type-forwarding
@@ -78,7 +78,7 @@ You will also need either include a `global.json` with:
 ```json
 {
   "msbuild-sdks": {
-    "Xamarin.Legacy.Sdk": "0.1.0-alpha1"
+    "Xamarin.Legacy.Sdk": "0.1.0-alpha2"
   }
 }
 ```
@@ -86,7 +86,7 @@ You will also need either include a `global.json` with:
 Or specify the version inline:
 
 ```xml
-<Project Sdk="Xamarin.Legacy.Sdk/0.1.0-alpha1">
+<Project Sdk="Xamarin.Legacy.Sdk/0.1.0-alpha2">
 ```
 
 To setup a binding project instead of a class library, simply set
