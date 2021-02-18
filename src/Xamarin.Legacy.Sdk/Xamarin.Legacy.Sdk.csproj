@@ -18,6 +18,7 @@
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
     <None Update="@(None)" Pack="true" PackagePath="/" />
+    <None Update="SignList.xml" Pack="false" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="_ClearNuGetCache" BeforeTargets="Build">
     <RemoveDir Directories="$(MSBuildThisFileDirectory)../../packages/xamarin.legacy.sdk/" />
