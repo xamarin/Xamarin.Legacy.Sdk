@@ -1,0 +1,8 @@
+<Project>
+  <!--
+  NOTE: if this package ever has .dll files:
+  <ItemGroup>
+    <FirstParty Include="Xamarin.Legacy.Sdk.dll" />
+  </ItemGroup>
+  -->
+</Project>
