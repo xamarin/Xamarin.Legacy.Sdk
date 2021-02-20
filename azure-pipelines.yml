@@ -18,6 +18,8 @@ variables:
     value: Release
   - name: DotNetVersion
     value: 6.0.100-preview.1.21103.13
+  - name: BootsVersion
+    value: 1.0.4.600-preview1
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: Android.Msi
@@ -47,7 +49,7 @@ jobs:
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
   - powershell: |
-      & dotnet tool install --global boots
+      & dotnet tool update --global boots --version $(BootsVersion)
       & boots $(Android.Msi)
       & boots $(iOS.Msi)
     displayName: install .NET workloads
@@ -88,7 +90,7 @@ jobs:
       echo "##vso[task.setvariable variable=PATH]$PATH"
     displayName: install .NET $(DotNetVersion)
   - bash: >
-      dotnet tool install --global boots &&
+      dotnet tool update --global boots --version $(BootsVersion) &&
       boots $(Android.Pkg) &&
       boots $(iOS.Pkg)
     displayName: install .NET workloads
