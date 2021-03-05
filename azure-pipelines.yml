@@ -97,12 +97,12 @@ jobs:
   - task: MSBuild@1
     inputs:
       solution: Xamarin.Legacy.Sdk.sln
-      msbuildArguments: -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
+      msbuildArguments: -restore -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
   - task: MSBuild@1
     inputs:
       solution: samples/samples.sln
-      msbuildArguments: -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
+      msbuildArguments: -restore -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
     displayName: build samples
   - task: PublishPipelineArtifact@1
     displayName: artifacts
