@@ -79,6 +79,8 @@ jobs:
   pool:
     vmImage: windows-latest
     demands: msbuild
+  variables:
+    MSBuildEnableWorkloadResolver: true
   steps:
   - powershell: |
       $ProgressPreference = 'SilentlyContinue'
