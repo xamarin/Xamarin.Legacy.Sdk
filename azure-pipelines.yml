@@ -17,23 +17,19 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100-preview.1.21103.13
+    value: 6.0.100-preview.4.21255.9
   - name: BootsVersion
-    value: 1.0.4.600-preview1
+    value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: Android.Msi
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4451481/master/05bb8e0eae11ae6a73838b13cf91ee2433169dff/Microsoft.NET.Workload.Android.11.0.200.85.msi
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4716293/6.0.1xx-preview4/a09fa1e93a94c7ee9f759c840ed7a5829d0e9152/Microsoft.NET.Workload.Android.11.0.200.245.msi
   - name: Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4451481/master/05bb8e0eae11ae6a73838b13cf91ee2433169dff/Microsoft.NET.Workload.Android-11.0.200-ci.master.85.pkg
-  - name: Xamarin.Android.Vsix
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4451481/master/05bb8e0eae11ae6a73838b13cf91ee2433169dff/signed/Xamarin.Android.Sdk-11.2.99.85.vsix
-  - name: Xamarin.Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4451481/master/05bb8e0eae11ae6a73838b13cf91ee2433169dff/xamarin.android-11.2.99.85.pkg
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/net6/4716293/6.0.1xx-preview4/a09fa1e93a94c7ee9f759c840ed7a5829d0e9152/Microsoft.NET.Workload.Android-11.0.200-preview.4.245.pkg
   - name: iOS.Msi
-    value: https://bosstoragemirror.azureedge.net/wrench/main/f01fde5cd9a7ffffcdc8d241200c35988700fa00/4449408/package/Microsoft.NET.Workload.iOS.14.3.100-ci.main.1079.msi
+    value: https://bosstoragemirror.azureedge.net/wrench/6.0.1xx-preview4/05cf7f73ec60d360f1a6391f1c047d4e8957203a/4731910/package/Microsoft.NET.Workload.iOS.14.5.100-preview.4.638.msi
   - name: iOS.Pkg
-    value: https://bosstoragemirror.azureedge.net/wrench/main/f01fde5cd9a7ffffcdc8d241200c35988700fa00/4449408/package/notarized/Microsoft.iOS.Bundle.14.3.100-ci.main.1079.pkg
+    value: https://bosstoragemirror.azureedge.net/wrench/6.0.1xx-preview4/05cf7f73ec60d360f1a6391f1c047d4e8957203a/4731910/package/notarized/Microsoft.iOS.Bundle.14.5.100-preview.4.638.pkg
 
 jobs:
 
@@ -54,7 +50,7 @@ jobs:
       & boots $(iOS.Msi)
     displayName: install .NET workloads
   - powershell: |
-      & boots $(Xamarin.Android.Vsix)
+      & boots --stable Xamarin.Android
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
@@ -82,6 +78,8 @@ jobs:
     DotNet.Root: /usr/local/share/dotnet/
     DotNet.Tools: ~/.dotnet/tools
   steps:
+  - script: echo '##vso[task.setvariable variable=JI_JAVA_HOME]$(JAVA_HOME_11_X64)'
+    displayName: set JI_JAVA_HOME
   - bash: >
       export PATH="$(DotNet.Root):$(DotNet.Tools):$PATH" &&
       curl -L https://dot.net/v1/dotnet-install.sh > dotnet-install.sh &&
@@ -94,7 +92,7 @@ jobs:
       boots $(Android.Pkg) &&
       boots $(iOS.Pkg)
     displayName: install .NET workloads
-  - bash: boots $(Xamarin.Android.Pkg)
+  - bash: boots --stable Xamarin.Android
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
