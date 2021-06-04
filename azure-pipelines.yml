@@ -90,7 +90,7 @@ jobs:
       & boots $(iOS.Msi)
     displayName: install .NET workloads
   - powershell: |
-      & boots $(Xamarin.Android.Vsix)
+      & boots --stable Xamarin.Android
     displayName: install Xamarin.Android
   - task: MSBuild@1
     inputs:
