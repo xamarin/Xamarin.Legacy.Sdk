@@ -70,6 +70,43 @@ jobs:
       pathToPublish: bin/Release
     condition: succeededOrFailed()
 
+# Builds with MSBuild from VS
+- job: vs
+  pool:
+    vmImage: windows-latest
+    demands: msbuild
+  steps:
+  - powershell: |
+      $ProgressPreference = 'SilentlyContinue'
+      Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
+      & .\dotnet-install.ps1 -Version $(DotNetVersion) -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
+      & dotnet --list-sdks
+    displayName: install .NET $(DotNetVersion)
+  - powershell: |
+      & dotnet tool update --global boots --version $(BootsVersion)
+      & boots $(Android.Msi)
+      & boots $(iOS.Msi)
+    displayName: install .NET workloads
+  - powershell: |
+      & boots --stable Xamarin.Android
+    displayName: install Xamarin.Android
+  - task: MSBuild@1
+    inputs:
+      solution: Xamarin.Legacy.Sdk.sln
+      msbuildArguments: -restore -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
+    displayName: build SDK
+  - task: MSBuild@1
+    inputs:
+      solution: samples/samples.sln
+      msbuildArguments: -restore -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
+    displayName: build samples
+  - task: PublishPipelineArtifact@1
+    displayName: artifacts
+    inputs:
+      artifact: vs
+      targetPath: bin
+    condition: succeededOrFailed()
+
 - job: mac
   pool:
     vmImage: macOS-latest
