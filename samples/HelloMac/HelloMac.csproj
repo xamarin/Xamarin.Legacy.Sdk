@@ -1,0 +1,11 @@
+<Project Sdk="Xamarin.Legacy.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>xamarinmac2.0;net6.0-macos</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="*.plist" />
+    <InterfaceDefinition Include="**\*.storyboard;**\*.xib" />
+  </ItemGroup>
+</Project>
