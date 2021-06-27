@@ -147,3 +147,4 @@ jobs:
     displayName: sign
     artifactName: nuget-unsigned
     dependsOn: windows
+    condition: ne(variables['Build.Reason'], 'PullRequest')
