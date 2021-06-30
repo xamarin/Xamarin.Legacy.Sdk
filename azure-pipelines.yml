@@ -43,7 +43,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots --stable Xamarin.Android
+      & boots --preview Xamarin.Android
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
@@ -80,7 +80,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots --stable Xamarin.Android
+      & boots --preview Xamarin.Android
     displayName: install Xamarin.Android
   - task: MSBuild@1
     inputs:
@@ -120,7 +120,7 @@ jobs:
     displayName: install .NET workloads
   - bash: >
       dotnet tool update --global boots --version $(BootsVersion) &&
-      boots --stable Xamarin.Android
+      boots --preview Xamarin.Android
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
