@@ -42,5 +42,10 @@
       <TargetFrameworkDirectory>$(FrameworkPathOverride)</TargetFrameworkDirectory>
     </PropertyGroup>
   </Target>
+  <Target Name="_DisableRemoteBuilds" AfterTargets="EvaluateRemoteBuild">
+    <PropertyGroup>
+      <IsRemoteBuild Condition=" '$(IsRemoteBuild)' == 'true' ">false</IsRemoteBuild>
+    </PropertyGroup>
+  </Target>
   <Import Project="Xamarin.Hacks.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
 </Project>
