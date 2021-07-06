@@ -126,6 +126,8 @@ jobs:
     displayName: build SDK
   - script: dotnet build samples/samples.sln -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
     displayName: build samples
+  - script: mkdir -p $(System.DefaultWorkingDirectory)/bin/Debug
+    displayName: fix missing NuGet source
   - script: dotnet build samples/HelloMac/HelloMac.csproj -bl:$(System.DefaultWorkingDirectory)/bin/HelloMac.binlog
     displayName: build HelloMac sample
   - task: PublishPipelineArtifact@1
