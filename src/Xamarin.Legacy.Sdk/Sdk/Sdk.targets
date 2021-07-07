@@ -2,6 +2,7 @@
   <PropertyGroup>
     <LanguageTargets Condition=" $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.Android.targets</LanguageTargets>
     <LanguageTargets Condition=" $(TargetFramework.StartsWith ('Xamarin.iOS', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.iOS.targets</LanguageTargets>
+    <LanguageTargets Condition=" $(TargetFramework.StartsWith ('XamarinMac', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.macOS.targets</LanguageTargets>
   </PropertyGroup>
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 </Project>
