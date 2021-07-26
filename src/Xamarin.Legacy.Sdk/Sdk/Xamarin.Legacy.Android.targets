@@ -20,6 +20,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+    <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
     <OutputPath Condition=" '$(OutputPath)' == '' ">$(BaseOutputPath)$(Configuration)</OutputPath>
     <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
