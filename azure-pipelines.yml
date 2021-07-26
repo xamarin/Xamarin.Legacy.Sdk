@@ -24,6 +24,10 @@ variables:
     value: true
   - name: DotNet.Workloads
     value: microsoft-android-sdk-full microsoft-ios-sdk-full microsoft-macos-sdk-full
+  - name: Xamarin.Android.Vsix
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/signed/Xamarin.Android.Sdk-11.4.99.30.vsix
+  - name: Xamarin.Android.Pkg
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/xamarin.android-11.4.99.30.pkg
 
 jobs:
 
@@ -43,7 +47,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots --preview Xamarin.Android
+      & boots $(Xamarin.Android.Vsix)
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
@@ -80,7 +84,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots --preview Xamarin.Android
+      & boots $(Xamarin.Android.Vsix)
     displayName: install Xamarin.Android
   - task: MSBuild@1
     inputs:
@@ -120,7 +124,7 @@ jobs:
     displayName: install .NET workloads
   - bash: >
       dotnet tool update --global boots --version $(BootsVersion) &&
-      boots --preview Xamarin.Android
+      boots $(Xamarin.Android.Pkg)
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
