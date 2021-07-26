@@ -22,6 +22,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);IOS</DefineConstants>
+    <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
   </PropertyGroup>
   <Import Project="$(_LegacyExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
   <Import Project="$(MSBuildExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
