@@ -23,7 +23,7 @@ variables:
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: DotNet.Workloads
-    value: microsoft-android-sdk-full microsoft-ios-sdk-full microsoft-macos-sdk-full
+    value: android ios macos
   - name: Xamarin.Android.Vsix
     value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/signed/Xamarin.Android.Sdk-11.4.99.30.vsix
   - name: Xamarin.Android.Pkg
