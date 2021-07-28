@@ -24,6 +24,8 @@ variables:
     value: true
   - name: DotNet.Workloads
     value: android ios macos
+  - name: DotNet.Workload.Feeds
+    value: --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://aka.ms/maui-preview/index.json
   - name: Xamarin.Android.Vsix
     value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/signed/Xamarin.Android.Sdk-11.4.99.30.vsix
   - name: Xamarin.Android.Pkg
@@ -45,7 +47,7 @@ jobs:
   - powershell: |
       mkdir $(System.DefaultWorkingDirectory)\bin\
       & dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)\bin\workload.json
-      & dotnet workload install $(DotNet.Workloads) --verbosity diag
+      & dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --verbosity diag
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
@@ -84,7 +86,7 @@ jobs:
   - powershell: |
       mkdir $(System.DefaultWorkingDirectory)\bin\
       & dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)\bin\workload.json
-      & dotnet workload install $(DotNet.Workloads) --verbosity diag
+      & dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --verbosity diag
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
@@ -127,7 +129,7 @@ jobs:
   - bash: >
       mkdir $(System.DefaultWorkingDirectory)/bin &&
       dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)/bin/workload.json && 
-      dotnet workload install $(DotNet.Workloads) --verbosity diag
+      dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --verbosity diag
     displayName: install .NET workloads
   - bash: >
       dotnet tool update --global boots --version $(BootsVersion) &&
