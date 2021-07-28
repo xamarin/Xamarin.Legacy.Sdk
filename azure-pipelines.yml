@@ -43,8 +43,8 @@ jobs:
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
   - powershell: |
-      mkdir .\bin\
-      & dotnet workload update --print-rollback > .\bin\workload.json
+      mkdir $(System.DefaultWorkingDirectory)\bin\
+      & dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)\bin\workload.json
       & dotnet workload install $(DotNet.Workloads) --verbosity diag
     displayName: install .NET workloads
   - powershell: |
@@ -82,8 +82,8 @@ jobs:
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
   - powershell: |
-      mkdir .\bin\
-      & dotnet workload update --print-rollback > .\bin\workload.json
+      mkdir $(System.DefaultWorkingDirectory)\bin\
+      & dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)\bin\workload.json
       & dotnet workload install $(DotNet.Workloads) --verbosity diag
     displayName: install .NET workloads
   - powershell: |
@@ -125,8 +125,8 @@ jobs:
       echo "##vso[task.setvariable variable=PATH]$PATH"
     displayName: install .NET $(DotNetVersion)
   - bash: >
-      mkdir bin &&
-      dotnet workload update --print-rollback > bin/workload.json && 
+      mkdir $(System.DefaultWorkingDirectory)/bin &&
+      dotnet workload update --print-rollback > $(System.DefaultWorkingDirectory)/bin/workload.json && 
       dotnet workload install $(DotNet.Workloads) --verbosity diag
     displayName: install .NET workloads
   - bash: >
