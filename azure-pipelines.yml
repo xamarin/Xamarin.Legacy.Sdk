@@ -18,8 +18,6 @@ variables:
     value: Release
   - name: DotNetVersion
     value: 6.0.100-preview.7.21377.35
-  - name: DotNet.Skip.First.Time.Experience
-    value: 1
   - name: BootsVersion
     value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
@@ -47,7 +45,7 @@ jobs:
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
   - powershell: |
-      & dotnet workload update --from-rollback-file workload.json --verbosity diag
+      & dotnet workload update $(DotNet.Workload.Feeds) --from-rollback-file workload.json --verbosity diag
       & dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --skip-manifest-update --verbosity diag
     displayName: install .NET workloads
   - powershell: |
@@ -85,7 +83,7 @@ jobs:
       & dotnet --list-sdks
     displayName: install .NET $(DotNetVersion)
   - powershell: |
-      & dotnet workload update --from-rollback-file workload.json --verbosity diag
+      & dotnet workload update $(DotNet.Workload.Feeds) --from-rollback-file workload.json --verbosity diag
       & dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --skip-manifest-update --verbosity diag
     displayName: install .NET workloads
   - powershell: |
@@ -127,7 +125,7 @@ jobs:
       echo "##vso[task.setvariable variable=PATH]$PATH"
     displayName: install .NET $(DotNetVersion)
   - bash: >
-      dotnet workload update --from-rollback-file workload.json --verbosity diag &&
+      dotnet workload update $(DotNet.Workload.Feeds) --from-rollback-file workload.json --verbosity diag &&
       dotnet workload install $(DotNet.Workloads) $(DotNet.Workload.Feeds) --skip-manifest-update --verbosity diag
     displayName: install .NET workloads
   - bash: >
