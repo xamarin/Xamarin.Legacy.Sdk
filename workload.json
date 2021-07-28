@@ -1,0 +1,10 @@
+{
+    "microsoft.net.sdk.tvos": "15.0.100-preview.7219",
+    "microsoft.net.sdk.android": "30.0.100-preview.7.105",
+    "microsoft.net.sdk.maui": "6.0.100-preview.7.1116",
+    "microsoft.net.sdk.macos": "12.0.100-preview.7219",
+    "microsoft.net.workload.emscripten": "6.0.0-rc.1.21378.1",
+    "microsoft.net.sdk.maccatalyst": "15.0.100-preview.7219",
+    "microsoft.net.sdk.ios": "15.0.100-preview.7219",
+    "microsoft.net.workload.mono.toolchain": "6.0.0-rc.1.21378.7"
+}
