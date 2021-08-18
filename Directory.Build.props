@@ -1,4 +1,4 @@
 <PropertyGroup>
-  <!-- Workaround issue with .NET 6 Preview 7 and VS MSBuild -->
+  <!-- Workaround issue with .NET 6.0.100-preview.7.21379.14 and VS MSBuild -->
   <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
 </PropertyGroup>
