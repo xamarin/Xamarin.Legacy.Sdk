@@ -17,17 +17,17 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100-preview.5.21302.13
+    value: 6.0.100-preview.7.21379.14
   - name: BootsVersion
     value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: DotNet.Workloads
-    value: microsoft-android-sdk-full microsoft-ios-sdk-full microsoft-macos-sdk-full
+    value: android ios macos
   - name: Xamarin.Android.Vsix
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/signed/Xamarin.Android.Sdk-11.4.99.30.vsix
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/signed/Xamarin.Android.Sdk-11.4.99.78.vsix
   - name: Xamarin.Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/4948326/6.0.1xx-preview6/9a7da6d3e943544abbf67758b50fd5afb21875cc/xamarin.android-11.4.99.30.pkg
+    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/xamarin.android-11.4.99.78.pkg
 
 jobs:
 
