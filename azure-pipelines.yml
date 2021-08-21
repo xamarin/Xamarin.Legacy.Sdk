@@ -26,8 +26,6 @@ variables:
     value: android ios macos
   - name: Xamarin.Android.Vsix
     value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/signed/Xamarin.Android.Sdk-11.4.99.78.vsix
-  - name: Xamarin.Android.Pkg
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/xamarin.android-11.4.99.78.pkg
 
 jobs:
 
