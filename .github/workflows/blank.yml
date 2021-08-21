@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-11
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.100-preview.7.21379.14
+
+      - name: install .NET workloads
+        run: dotnet workload install android ios macos --verbosity diag
+
+      - name: build SDK
+        run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog
+
+      - name: build samples
+        run: dotnet build samples/samples.sln -bl:bin/samples.binlog
+
+      - name: artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: bin
+          if-no-files-found: error
