@@ -1,0 +1,43 @@
+name: Github Actions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  mac:
+    runs-on: macos-11
+
+    env:
+      Configuration: Release
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.100-preview.7.21379.14
+
+      - name: install .NET workloads
+        run: dotnet workload install android ios macos --verbosity diag
+
+      - name: install Xamarin.Android
+        run: |
+          dotnet tool update --global boots --version 1.0.4.624
+          boots https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/xamarin.android-11.4.99.78.pkg
+
+      - name: build SDK
+        run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog
+
+      - name: build samples
+        run: dotnet build samples/samples.sln -bl:bin/samples.binlog
+
+      - name: artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: bin
+          if-no-files-found: error
