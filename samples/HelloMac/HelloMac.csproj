@@ -4,9 +4,4 @@
     <OutputType>Exe</OutputType>
     <RuntimeIdentifier>osx-x64</RuntimeIdentifier>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'xamarinmac2.0'">
-    <None Include="*.plist" />
-    <InterfaceDefinition Include="**\*.storyboard;**\*.xib" />
-  </ItemGroup>
 </Project>
