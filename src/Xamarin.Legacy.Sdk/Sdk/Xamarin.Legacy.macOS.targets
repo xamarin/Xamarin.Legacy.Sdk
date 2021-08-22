@@ -22,6 +22,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);MAC</DefineConstants>
+    <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
+    <TargetPlatformIdentifier>macOS</TargetPlatformIdentifier>
+    <EnableDefaultmacOSItems Condition=" '$(EnableDefaultmacOSItems)' == '' ">true</EnableDefaultmacOSItems>
   </PropertyGroup>
   <Import Project="$(_LegacyExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
   <Import Project="$(MSBuildExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
