@@ -35,6 +35,9 @@ jobs:
       - name: build samples
         run: dotnet build samples/samples.sln -bl:bin/samples.binlog
 
+      - name: fix missing NuGet source
+        run: mkdir -p bin/Debug
+
       - name: build HelloMac sample
         run: dotnet build samples/HelloMac/HelloMac.csproj -bl:bin/HelloMac.binlog
 
