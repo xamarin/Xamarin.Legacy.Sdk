@@ -30,7 +30,12 @@ jobs:
           boots https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/xamarin.android-11.4.99.78.pkg
 
       - name: select Xcode 13 beta
-        run: sudo xcode-select -s /Applications/Xcode_13.0.app
+        run: |
+          set -x
+          mkdir -p ~/Library/Preferences/Xamarin
+          rm -f ~/Library/Preferences/Xamarin/Settings.plist
+          /usr/libexec/PlistBuddy -c "add :AppleSdkRoot string /Applications/Xcode_13.0.app" ~/Library/Preferences/Xamarin/Settings.plist || true
+          cat ~/Library/Preferences/Xamarin/Settings.plist || true
 
       - name: build SDK
         run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog
