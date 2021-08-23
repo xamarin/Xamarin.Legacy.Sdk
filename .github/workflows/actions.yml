@@ -55,4 +55,5 @@ jobs:
         with:
           name: artifacts
           path: bin
+          if: always()
           if-no-files-found: error
