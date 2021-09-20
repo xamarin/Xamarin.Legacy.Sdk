@@ -32,7 +32,7 @@ jobs:
       - name: select Xcode 13 beta
         run: |
           set -x
-          sudo xcode-select -s /Applications/Xcode_13.0.app
+          sudo xcode-select -s /Applications/Xcode_13.0_beta.app
           mkdir -p ~/Library/Preferences/Xamarin
           rm -f ~/Library/Preferences/Xamarin/Settings.plist
           /usr/libexec/PlistBuddy -c "add :AppleSdkRoot string $(dirname $(dirname $(xcode-select -p)))" ~/Library/Preferences/Xamarin/Settings.plist || true
