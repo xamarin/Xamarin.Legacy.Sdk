@@ -32,6 +32,12 @@ jobs:
     vmImage: windows-latest
     demands: msbuild
   steps:
+  - task: JavaToolInstaller@0
+    displayName: install JDK 11
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
   - powershell: |
       $ProgressPreference = 'SilentlyContinue'
       Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
@@ -69,6 +75,12 @@ jobs:
     vmImage: windows-latest
     demands: msbuild
   steps:
+  - task: JavaToolInstaller@0
+    displayName: install JDK 11
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
   - powershell: |
       $ProgressPreference = 'SilentlyContinue'
       Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
