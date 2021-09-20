@@ -17,15 +17,13 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100-preview.7.21379.14
+    value: 6.0.100-rc.1.21458.32
   - name: BootsVersion
     value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
     value: true
   - name: DotNet.Workloads
     value: android ios macos
-  - name: Xamarin.Android.Vsix
-    value: https://dl.internalx.com/vsts-devdiv/Xamarin.Android/public/5045838/6.0.1xx-preview7/f38d0a639add19221694ad73f79c34d2c7c76948/signed/Xamarin.Android.Sdk-11.4.99.78.vsix
 
 jobs:
 
@@ -34,6 +32,12 @@ jobs:
     vmImage: windows-latest
     demands: msbuild
   steps:
+  - task: JavaToolInstaller@0
+    displayName: install JDK 11
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
   - powershell: |
       $ProgressPreference = 'SilentlyContinue'
       Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
@@ -45,7 +49,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots $(Xamarin.Android.Vsix)
+      & boots --preview Xamarin.Android
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
@@ -71,6 +75,12 @@ jobs:
     vmImage: windows-latest
     demands: msbuild
   steps:
+  - task: JavaToolInstaller@0
+    displayName: install JDK 11
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
   - powershell: |
       $ProgressPreference = 'SilentlyContinue'
       Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
@@ -82,7 +92,7 @@ jobs:
     displayName: install .NET workloads
   - powershell: |
       & dotnet tool update --global boots --version $(BootsVersion)
-      & boots $(Xamarin.Android.Vsix)
+      & boots --preview Xamarin.Android
     displayName: install Xamarin.Android
   - task: MSBuild@1
     inputs:
