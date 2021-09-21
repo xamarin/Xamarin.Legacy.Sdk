@@ -1,0 +1,7 @@
+<Project Sdk="Xamarin.Legacy.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>xamarinmac2.0;net6.0-macos</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>osx-x64</RuntimeIdentifier>
+  </PropertyGroup>
+</Project>

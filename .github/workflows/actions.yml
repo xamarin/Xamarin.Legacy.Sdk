@@ -29,15 +29,31 @@ jobs:
           dotnet tool update --global boots --version 1.0.4.624
           boots --preview Xamarin.Android
 
+      - name: select Xcode 13 beta
+        run: |
+          set -x
+          sudo xcode-select -s /Applications/Xcode_13.0_beta.app
+          mkdir -p ~/Library/Preferences/Xamarin
+          rm -f ~/Library/Preferences/Xamarin/Settings.plist
+          /usr/libexec/PlistBuddy -c "add :AppleSdkRoot string $(dirname $(dirname $(xcode-select -p)))" ~/Library/Preferences/Xamarin/Settings.plist || true
+          cat ~/Library/Preferences/Xamarin/Settings.plist || true
+
       - name: build SDK
         run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog
 
       - name: build samples
         run: dotnet build samples/samples.sln -bl:bin/samples.binlog
 
+      - name: fix missing NuGet source
+        run: mkdir -p bin/Debug
+
+      - name: build HelloMac sample
+        run: dotnet build samples/HelloMac/HelloMac.csproj -bl:bin/HelloMac.binlog
+
       - name: artifacts
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
           path: bin
+          if: always()
           if-no-files-found: error

@@ -1,0 +1,49 @@
+<Project>
+  <!--
+    In some cases, MSBuild already has a valid $(MSBuildExtensionsPath).
+    This would happen when building with a new enough .NET framework/Mono MSBuild.
+  -->
+  <PropertyGroup Condition=" !Exists('$(MSBuildExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets') ">
+    <_FixupsNeeded>true</_FixupsNeeded>
+  </PropertyGroup>
+  <Import
+      Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) "
+      Project="Xamarin.VsInstallRoot.targets"
+  />
+  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('windows')) ">
+    <FrameworkPathOverride>$(TargetFrameworkRootPath)Xamarin.Mac/v2.0/</FrameworkPathOverride>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) ">
+    <MonoPath Condition=" '$(MonoPath)' == '' ">/Library/Frameworks/Mono.framework/</MonoPath>
+    <XamarinMacInstallPath Condition=" '$(XamarinMacInstallPath)' == '' ">/Library/Frameworks/Xamarin.Mac.framework/</XamarinMacInstallPath>
+    <TargetFrameworkRootPath>$(MonoPath)External/xbuild-frameworks/</TargetFrameworkRootPath>
+    <_LegacyExtensionsPath>$(MonoPath)External/xbuild</_LegacyExtensionsPath>
+    <FrameworkPathOverride>$(XamarinMacInstallPath)Versions/Current/lib/mono/Xamarin.Mac/</FrameworkPathOverride>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);MAC</DefineConstants>
+    <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
+    <TargetPlatformIdentifier>macOS</TargetPlatformIdentifier>
+    <EnableDefaultmacOSItems Condition=" '$(EnableDefaultmacOSItems)' == '' ">true</EnableDefaultmacOSItems>
+  </PropertyGroup>
+  <Import Project="$(_LegacyExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
+  <Import Project="$(MSBuildExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
+  <ItemGroup Condition=" '$(DisableImplicitFrameworkReferences)' != 'true' ">
+    <Reference Include="mscorlib"                CopyLocal="false" />
+    <Reference Include="Xamarin.Mac"             CopyLocal="false" />
+    <Reference Include="System"                  CopyLocal="false" />
+    <Reference Include="System.Core"             CopyLocal="false" />
+    <Reference Include="System.Numerics"         CopyLocal="false" />
+    <Reference Include="System.Numerics.Vectors" CopyLocal="false" />
+    <Reference Include="System.Xml"              CopyLocal="false" />
+  </ItemGroup>
+  <!-- HACK: workaround $(TargetFrameworkDirectory) on macOS -->
+  <Target Name="_FixTargetFrameworkDirectory"
+      Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) "
+      AfterTargets="GetReferenceAssemblyPaths">
+    <PropertyGroup>
+      <TargetFrameworkDirectory>$(FrameworkPathOverride)</TargetFrameworkDirectory>
+    </PropertyGroup>
+  </Target>
+  <Import Project="Xamarin.Hacks.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
+</Project>
