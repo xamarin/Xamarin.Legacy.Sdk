@@ -4,6 +4,6 @@
   },
   "msbuild-sdks": {
     "Microsoft.Build.NoTargets": "2.0.1",
-    "Xamarin.Legacy.Sdk": "0.1.0-alpha4"
+    "Xamarin.Legacy.Sdk": "0.1.1-alpha5"
   }
 }
