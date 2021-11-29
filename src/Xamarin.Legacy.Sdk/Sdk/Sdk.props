@@ -3,21 +3,5 @@
     <!-- A public property that could be used to detect this SDK -->
     <XamarinLegacySdk>true</XamarinLegacySdk>
   </PropertyGroup>
-
-  <!--
-    HACK: declare a _GetRestoreSettingsPerFramework target that some versions of NuGet expect to exist.
-    This target should get replaced by NuGet.targets if needed:
-    https://github.com/NuGet/NuGet.Client/blob/914cacea77660b8758014912ee127c82469ac1d9/src/NuGet.Core/NuGet.Build.Tasks/NuGet.targets#L635-L651
-  -->
-  <Target Name="_GetRestoreSettingsPerFramework" Returns="@(_RestoreSettingsPerFramework)">
-    <ItemGroup>
-      <_RestoreSettingsPerFramework Include="$([System.Guid]::NewGuid())">
-        <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
-        <RestoreAdditionalProjectFallbackFolders>$(RestoreAdditionalProjectFallbackFolders)</RestoreAdditionalProjectFallbackFolders>
-        <RestoreAdditionalProjectFallbackFoldersExcludes>$(RestoreAdditionalProjectFallbackFoldersExcludes)</RestoreAdditionalProjectFallbackFoldersExcludes>
-      </_RestoreSettingsPerFramework>
-    </ItemGroup>
-  </Target>
-
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 </Project>
