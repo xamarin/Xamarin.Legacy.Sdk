@@ -1,0 +1,7 @@
+<Project>
+  <!-- HACK: workaround assembly load failure -->
+  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Core' and $([MSBuild]::IsOSPlatform ('windows')) ">
+    <_iOSDirectory>$([System.IO.Directory]::GetDirectories('$(NetCoreRoot)packs\Microsoft.iOS.Sdk\', '*')[0])</_iOSDirectory>
+    <MessagingBuildClientAssemblyFile>$(_iOSDirectory)\tools\msbuild\iOS\Xamarin.iOS.Tasks.dll</MessagingBuildClientAssemblyFile>
+  </PropertyGroup>
+</Project>

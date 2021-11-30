@@ -19,7 +19,7 @@ jobs:
       - name: install .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.100-rc.1.21458.32
+          dotnet-version: 6.0.100
 
       - name: install .NET workloads
         run: dotnet workload install android ios macos --verbosity diag
@@ -28,15 +28,6 @@ jobs:
         run: |
           dotnet tool update --global boots --version 1.0.4.624
           boots --preview Xamarin.Android
-
-      - name: select Xcode 13 beta
-        run: |
-          set -x
-          sudo xcode-select -s /Applications/Xcode_13.0_beta.app
-          mkdir -p ~/Library/Preferences/Xamarin
-          rm -f ~/Library/Preferences/Xamarin/Settings.plist
-          /usr/libexec/PlistBuddy -c "add :AppleSdkRoot string $(dirname $(dirname $(xcode-select -p)))" ~/Library/Preferences/Xamarin/Settings.plist || true
-          cat ~/Library/Preferences/Xamarin/Settings.plist || true
 
       - name: build SDK
         run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog

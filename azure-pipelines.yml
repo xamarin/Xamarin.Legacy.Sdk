@@ -17,7 +17,7 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100-rc.1.21458.32
+    value: 6.0.100
   - name: BootsVersion
     value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
@@ -29,7 +29,7 @@ jobs:
 
 - job: windows
   pool:
-    vmImage: windows-latest
+    vmImage: windows-2022
     demands: msbuild
   steps:
   - task: JavaToolInstaller@0
@@ -72,7 +72,7 @@ jobs:
 # Builds with MSBuild from VS
 - job: vs
   pool:
-    vmImage: windows-latest
+    vmImage: windows-2022
     demands: msbuild
   steps:
   - task: JavaToolInstaller@0
