@@ -25,6 +25,7 @@
     <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
     <TargetPlatformIdentifier>iOS</TargetPlatformIdentifier>
     <EnableDefaultiOSItems Condition=" '$(EnableDefaultiOSItems)' == '' ">true</EnableDefaultiOSItems>
+    <AfterMicrosoftNETSdkTargets>$(AfterMicrosoftNETSdkTargets);$(MSBuildThisFileDirectory)Xamarin.Legacy.iOS.After.targets</AfterMicrosoftNETSdkTargets>
   </PropertyGroup>
   <Import Project="$(_LegacyExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
   <Import Project="$(MSBuildExtensionsPath)/Xamarin/iOS/Xamarin.iOS.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
