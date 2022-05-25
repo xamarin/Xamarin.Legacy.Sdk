@@ -23,7 +23,6 @@
     <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
     <OutputPath Condition=" '$(OutputPath)' == '' ">$(BaseOutputPath)$(Configuration)</OutputPath>
     <TargetPlatformIdentifier>Android</TargetPlatformIdentifier>
-    <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">true</EnableDefaultAndroidItems>
     <AndroidUseIntermediateDesignerFile Condition=" '$(AndroidUseIntermediateDesignerFile)' == '' ">true</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
   <Import Sdk="Microsoft.Android.Sdk" Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets" />

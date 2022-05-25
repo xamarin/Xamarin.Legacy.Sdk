@@ -3,6 +3,8 @@
     <LanguageTargets Condition=" $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.Android.targets</LanguageTargets>
     <LanguageTargets Condition=" $(TargetFramework.StartsWith ('Xamarin.iOS', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.iOS.targets</LanguageTargets>
     <LanguageTargets Condition=" $(TargetFramework.StartsWith ('XamarinMac', StringComparison.OrdinalIgnoreCase)) ">$(MSBuildThisFileDirectory)Xamarin.Legacy.macOS.targets</LanguageTargets>
+    <EnableDefaultAndroidItems Condition=" '$(EnableDefaultAndroidItems)' == '' ">false</EnableDefaultAndroidItems>
+    <EnableDefaultXamarinLegacySdkItems Condition=" '$(EnableDefaultXamarinLegacySdkItems)' == '' ">true</EnableDefaultXamarinLegacySdkItems>
   </PropertyGroup>
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 </Project>
