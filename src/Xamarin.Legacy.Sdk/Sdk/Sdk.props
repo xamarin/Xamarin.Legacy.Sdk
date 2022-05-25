@@ -4,4 +4,5 @@
     <XamarinLegacySdk>true</XamarinLegacySdk>
   </PropertyGroup>
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+  <Import Project="AutoImport.Android.props" />
 </Project>
