@@ -17,7 +17,7 @@ variables:
   - name: Configuration
     value: Release
   - name: DotNetVersion
-    value: 6.0.100
+    value: 6.0.300
   - name: BootsVersion
     value: 1.0.4.624
   - name: DotNet.Cli.Telemetry.OptOut
@@ -53,6 +53,8 @@ jobs:
     displayName: install Xamarin.Android
   - script: dotnet build Xamarin.Legacy.Sdk.sln -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
+  - script: mkdir bin\Debug
+    displayName: fix missing NuGet source
   - script: dotnet build samples/samples.sln -bl:$(System.DefaultWorkingDirectory)/bin/samples.binlog
     displayName: build samples
   - task: PublishPipelineArtifact@1
@@ -99,6 +101,8 @@ jobs:
       solution: Xamarin.Legacy.Sdk.sln
       msbuildArguments: -restore -bl:$(System.DefaultWorkingDirectory)/bin/Xamarin.Legacy.Sdk.binlog
     displayName: build SDK
+  - script: mkdir bin\Debug
+    displayName: fix missing NuGet source
   - task: MSBuild@1
     inputs:
       solution: samples/samples.sln

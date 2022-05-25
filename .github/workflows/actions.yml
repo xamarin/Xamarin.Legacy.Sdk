@@ -8,7 +8,7 @@ on:
 
 jobs:
   mac:
-    runs-on: macos-11
+    runs-on: macos-12
 
     env:
       Configuration: Release
@@ -19,7 +19,7 @@ jobs:
       - name: install .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.100
+          dotnet-version: 6.0.300
 
       - name: install .NET workloads
         run: dotnet workload install android ios macos --verbosity diag
@@ -32,11 +32,11 @@ jobs:
       - name: build SDK
         run: dotnet build Xamarin.Legacy.Sdk.sln -bl:bin/Xamarin.Legacy.Sdk.binlog
 
-      - name: build samples
-        run: dotnet build samples/samples.sln -bl:bin/samples.binlog
-
       - name: fix missing NuGet source
         run: mkdir -p bin/Debug
+
+      - name: build samples
+        run: dotnet build samples/samples.sln -bl:bin/samples.binlog
 
       - name: build HelloMac sample
         run: dotnet build samples/HelloMac/HelloMac.csproj -bl:bin/HelloMac.binlog

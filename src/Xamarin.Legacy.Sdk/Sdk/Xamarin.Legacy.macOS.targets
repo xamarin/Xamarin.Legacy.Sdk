@@ -25,6 +25,7 @@
     <LangVersion Condition=" '$(LangVersion)' == '' ">latest</LangVersion>
     <TargetPlatformIdentifier>macOS</TargetPlatformIdentifier>
     <EnableDefaultmacOSItems Condition=" '$(EnableDefaultmacOSItems)' == '' ">true</EnableDefaultmacOSItems>
+    <NoNFloatUsing Condition=" '$(NoNFloatUsing)' == '' ">true</NoNFloatUsing>
   </PropertyGroup>
   <Import Project="$(_LegacyExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
   <Import Project="$(MSBuildExtensionsPath)/Xamarin/Mac/Xamarin.Mac.CSharp.targets" Condition=" '$(_FixupsNeeded)' != 'true' " />
