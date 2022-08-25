@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Workaround for current .NET 6 -->
+    <UseMicrosoftAndroidSdk>true</UseMicrosoftAndroidSdk>
+  </PropertyGroup>
+</Project>
