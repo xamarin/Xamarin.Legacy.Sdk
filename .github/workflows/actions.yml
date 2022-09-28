@@ -19,14 +19,14 @@ jobs:
       - name: install .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.300
+          dotnet-version: 6.0.400
 
       - name: install .NET workloads
         run: dotnet workload install android ios macos --verbosity diag
 
       - name: install Xamarin.Android
         run: |
-          dotnet tool update --global boots --version 1.0.4.624
+          dotnet tool update --global boots --version 1.1.0.36
           boots --preview Xamarin.Android
 
       - name: build SDK
