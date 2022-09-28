@@ -187,7 +187,7 @@ error : /usr/local/share/dotnet/sdk/6.0.100-alpha.1.20562.2/Sdks/Microsoft.Andro
 
 Verify you are using `dotnet build` have the required [.NET 6][net6-samples] packages installed.
 
-#### libMonoPosixHelper.dylib
+### libMonoPosixHelper.dylib
 
 If you hit the error:
 
