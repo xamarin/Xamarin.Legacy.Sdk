@@ -10,7 +10,8 @@ NOTE! everything must be conditioned behind:
     <Using Include="Android.OS.Bundle" Alias="Bundle" Platform="Android" Sdk="Xamarin.Legacy.Sdk" />
   </ItemGroup>
 
-  <ItemGroup Condition=" ('$(TargetPlatformIdentifier)' == 'android' or $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
+  <ItemGroup Condition=" ('$(TargetPlatformIdentifier)' == 'android' or $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and '$(EnableDefaultXamarinLegacySdkItems)' == 'true' 
+                        and ('$(MonoAndroidAssetsPrefix)' != '' and '$(MonoAndroidResourcePrefix)' != '') ">
     <!-- Default Resource file inclusion -->
     <!-- https://developer.android.com/guide/topics/resources/providing-resources -->
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\*\*.xml" />
@@ -23,7 +24,10 @@ NOTE! everything must be conditioned behind:
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\font\*.ttc" />
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\raw\*" Exclude="$(MonoAndroidResourcePrefix)\raw\.*" />
     <!-- Default Asset file inclusion -->
-    <AndroidAsset Condition=" '$(MonoAndroidAssetsPrefix)' != '' " Include="$(MonoAndroidAssetsPrefix)\**\*" Exclude="$(MonoAndroidAssetsPrefix)\**\.*\**" />
+    <AndroidAsset Include="$(MonoAndroidAssetsPrefix)\**\*" Exclude="$(MonoAndroidAssetsPrefix)\**\.*\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" ('$(TargetPlatformIdentifier)' == 'android' or $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
     <!-- Default XPath transforms for bindings -->
     <TransformFile Include="Transforms*.xml" />
     <TransformFile Include="Transforms\**\*.xml" />
