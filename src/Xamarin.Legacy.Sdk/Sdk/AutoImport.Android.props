@@ -23,7 +23,7 @@ NOTE! everything must be conditioned behind:
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\font\*.ttc" />
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\raw\*" Exclude="$(MonoAndroidResourcePrefix)\raw\.*" />
     <!-- Default Asset file inclusion -->
-    <AndroidAsset Condition=" ('$(MonoAndroidAssetsPrefix)' != ''" Include="$(MonoAndroidAssetsPrefix)\**\*" Exclude="$(MonoAndroidAssetsPrefix)\**\.*\**" />
+    <AndroidAsset Condition=" '$(MonoAndroidAssetsPrefix)' != '' " Include="$(MonoAndroidAssetsPrefix)\**\*" Exclude="$(MonoAndroidAssetsPrefix)\**\.*\**" />
     <!-- Default XPath transforms for bindings -->
     <TransformFile Include="Transforms*.xml" />
     <TransformFile Include="Transforms\**\*.xml" />
