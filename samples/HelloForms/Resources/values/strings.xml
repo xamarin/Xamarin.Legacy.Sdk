@@ -1,0 +1,4 @@
+<resources>
+    <string name="legacy">Hello, Xamarin.Android</string>
+    <string name="net6">Hello, .NET 6!</string>
+</resources>
