@@ -43,8 +43,13 @@
       Condition=" '$(_FixupsNeeded)' == 'true' and $([MSBuild]::IsOSPlatform ('osx')) "
       AfterTargets="GetReferenceAssemblyPaths">
     <PropertyGroup>
-      <TargetFrameworkDirectory>$(FrameworkPathOverride)</TargetFrameworkDirectory>
+      <TargetFrameworkDirectory>$(FrameworkPathOverride);$(FrameworkPathOverride)Facades/</TargetFrameworkDirectory>
     </PropertyGroup>
+    <ItemGroup>
+      <DesignTimeFacadeDirectoryRoots Include="$(FrameworkPathOverride)" />
+      <DesignTimeFacadeDirectoryRoots Include="$(FrameworkPathOverride)Facades/" />
+      <DesignTimeFacadeDirectories Include="$(FrameworkPathOverride)Facades/" />
+    </ItemGroup>
   </Target>
   <Import Project="Xamarin.Hacks.targets" Condition=" '$(_FixupsNeeded)' == 'true' " />
 </Project>
