@@ -4,5 +4,7 @@
     <OutputType>Exe</OutputType>
     <RuntimeIdentifier>osx-x64</RuntimeIdentifier>
     <SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
+    <!-- HACK: workaround Xcode versions -->
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 </Project>
