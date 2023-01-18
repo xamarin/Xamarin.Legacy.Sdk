@@ -19,7 +19,7 @@ jobs:
       - name: install .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.400
+          dotnet-version: 7.0.100
 
       - name: install .NET workloads
         run: dotnet workload install android ios macos --verbosity diag
