@@ -3,7 +3,9 @@
     <TargetFramework>xamarin.ios10</TargetFramework>
     <OutputType>Exe</OutputType>
     <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
-    <MtouchArch>ARM64</MtouchArch>
+    <Platform>iPhoneSimulator</Platform>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <MtouchArch>x86_64</MtouchArch>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
