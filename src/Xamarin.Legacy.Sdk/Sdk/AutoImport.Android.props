@@ -10,7 +10,10 @@ NOTE! everything must be conditioned behind:
     <Using Include="Android.OS.Bundle" Alias="Bundle" Platform="Android" Sdk="Xamarin.Legacy.Sdk" />
   </ItemGroup>
 
-  <ItemGroup Condition=" ('$(TargetPlatformIdentifier)' == 'android' or $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
+  <ItemGroup Condition=" '$(MonoAndroidResourcePrefix)' != '' and
+      ('$(TargetPlatformIdentifier)' == 'android' or
+      $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and
+      '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
     <!-- Default Resource file inclusion -->
     <!-- https://developer.android.com/guide/topics/resources/providing-resources -->
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\*\*.xml" />
@@ -22,8 +25,19 @@ NOTE! everything must be conditioned behind:
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\font\*.otf" />
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\font\*.ttc" />
     <AndroidResource Include="$(MonoAndroidResourcePrefix)\raw\*" Exclude="$(MonoAndroidResourcePrefix)\raw\.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(MonoAndroidAssetsPrefix)' != ''
+      and ('$(TargetPlatformIdentifier)' == 'android' or
+      $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and
+      '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
     <!-- Default Asset file inclusion -->
     <AndroidAsset Include="$(MonoAndroidAssetsPrefix)\**\*" Exclude="$(MonoAndroidAssetsPrefix)\**\.*\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" ('$(TargetPlatformIdentifier)' == 'android' or
+      $(TargetFramework.StartsWith ('MonoAndroid', StringComparison.OrdinalIgnoreCase))) and
+      '$(EnableDefaultXamarinLegacySdkItems)' == 'true' ">
     <!-- Default XPath transforms for bindings -->
     <TransformFile Include="Transforms*.xml" />
     <TransformFile Include="Transforms\**\*.xml" />
