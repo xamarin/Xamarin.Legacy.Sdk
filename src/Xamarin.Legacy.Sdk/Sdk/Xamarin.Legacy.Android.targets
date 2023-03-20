@@ -31,13 +31,18 @@
       Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets"
   />
   <Import
-      Condition=" '$(UseMicrosoftAndroidSdk)' != 'true' and ('$(UseMicrosoftAndroidSdkNet6)' == 'true' or !$([MSBuild]::VersionEquals($(TargetFrameworkVersion), '7.0')))"
+      Condition=" '$(UseMicrosoftAndroidSdk)' != 'true' and ('$(UseMicrosoftAndroidSdkNet6)' == 'true' or $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '6.0')))"
       Sdk="Microsoft.Android.Sdk.net6"
       Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets"
   />
   <Import
       Condition=" '$(UseMicrosoftAndroidSdk)' != 'true' and ('$(UseMicrosoftAndroidSdkNet7)' == 'true' or $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '7.0')))"
       Sdk="Microsoft.Android.Sdk.net7"
+      Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets"
+  />
+  <Import
+      Condition=" '$(UseMicrosoftAndroidSdk)' != 'true' and ('$(UseMicrosoftAndroidSdkNet8)' == 'true' or $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '8.0')))"
+      Sdk="Microsoft.Android.Sdk.net8"
       Project="../targets/Microsoft.Android.Sdk.DefaultProperties.targets"
   />
   <Import Project="$(_LegacyExtensionsPath)/Xamarin/Android/Xamarin.Android.CSharp.targets"   Condition=" '$(IsBindingProject)' != 'true' and '$(_FixupsNeeded)' == 'true' " />
