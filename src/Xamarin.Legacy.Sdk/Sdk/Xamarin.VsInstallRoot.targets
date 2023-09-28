@@ -2,10 +2,24 @@
 <Project>
   <PropertyGroup>
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and '$(VSINSTALLDIR)' != '' ">$(VSINSTALLDIR)</VsInstallRoot>
-    <!-- Prefer ordering of 2022 Preview, 2022, 2019  -->
+
+    <!-- Prefer ordering of 2022 Preview -> 2022 Enterprise -> 2022 Professional -> 2022 Community -> 2019 Enterprise -> etc -->
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(ProgramFiles)/Microsoft Visual Studio/2022/Preview/') ">$(ProgramFiles)/Microsoft Visual Studio/2022/Preview/</VsInstallRoot>
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(ProgramFiles)/Microsoft Visual Studio/2022/Enterprise/') ">$(ProgramFiles)/Microsoft Visual Studio/2022/Enterprise/</VsInstallRoot>
-    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(ProgramFiles)/Microsoft Visual Studio/2022/Professional/') ">$(ProgramFiles)/Microsoft Visual Studio/2022/Professional/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(ProgramFiles)/Microsoft Visual Studio/2022/Community/') ">$(ProgramFiles)/Microsoft Visual Studio/2022/Community/</VsInstallRoot>
+    
+    <!--    we dont add the following heuristics on purpose as they dont make sense for vs2022  thats because the build-tools files we are interested   -->
+    <!--    in for vs2022 get installed directly under $(ProgramFiles)/Microsoft Visual Studio/2022/Enterprise|Community|Preview nowadays               -->
+    <!--                                                                                                                                                -->
+    <!--    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(ProgramFiles)/Microsoft Visual Studio/2022/BuildTools/</VsInstallRoot>              -->
+    <!--    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2022/BuildTools/</VsInstallRoot>     -->
+
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Professional/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Professional/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Community/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Community/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/BuildTools/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/BuildTools/</VsInstallRoot>
+
     <TargetFrameworkRootPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
     <_LegacyExtensionsPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))MSBuild</_LegacyExtensionsPath>
   </PropertyGroup>
