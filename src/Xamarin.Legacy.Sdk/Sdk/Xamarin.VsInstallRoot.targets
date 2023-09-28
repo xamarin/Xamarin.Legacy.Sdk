@@ -9,6 +9,7 @@
 
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Enterprise/</VsInstallRoot>
     <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Community/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/Community/</VsInstallRoot>
+    <VsInstallRoot Condition=" '$(VsInstallRoot)' == '' and Exists ('$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/BuildTools/') ">$(MSBuildProgramFiles32)/Microsoft Visual Studio/2019/BuildTools/</VsInstallRoot>
 
     <TargetFrameworkRootPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))Common7/IDE/ReferenceAssemblies/Microsoft/Framework/</TargetFrameworkRootPath>
     <_LegacyExtensionsPath>$([MSBuild]::EnsureTrailingSlash($(VsInstallRoot)))MSBuild</_LegacyExtensionsPath>
